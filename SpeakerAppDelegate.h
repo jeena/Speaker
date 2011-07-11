@@ -23,4 +23,7 @@
 -(IBAction)seekForward:(id)sender;
 -(IBAction)seekBack:(id)sender;
 
+-(void)stopSpeaking;
+-(void)startSpeaking;
+
 @end

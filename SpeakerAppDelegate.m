@@ -40,58 +40,55 @@
 
 -(IBAction)speakAction:(id)sender {
 	if ([synth isSpeaking]) {
-		
-		[synth pauseSpeakingAtBoundary:NSSpeechWordBoundary];
-		[textView setEditable:YES];
-		
+		[self stopSpeaking];
 	} else {
-		
-		[textView setEditable:NO];
-		
-		NSRange range = [textView selectedRange];
-
-		if (range.location == [[[textView textStorage] string] length]) {
-			range.location = 0;
-			[textView setSelectedRange:NSMakeRange(0,0)];
-			[textView scrollRangeToVisible:NSMakeRange(0,0)];
-		}
-		
-		if (range.length != oldRange.length || range.location != oldRange.location || isNewLocation) {
-			isNewLocation = NO;
-			NSString *wholeText = [[textView textStorage] string];
-			NSString *text = nil;
-			
-			if (range.length > 0) { // selection
-				text = [wholeText substringWithRange:range];
-			} else { // only pointer
-				text = [wholeText substringWithRange:NSMakeRange(range.location, [wholeText length] - range.location)];
-			}
-			
-			[synth startSpeakingString:text];
-			
-			oldRange = range;
-
-		} else {
-
-			[synth continueSpeaking];
-
-		}
+		[self startSpeaking];
 	}
+}
 
+-(void)stopSpeaking {
+	[synth pauseSpeakingAtBoundary:NSSpeechWordBoundary];
+	[textView setEditable:YES];
+}
+
+-(void)startSpeaking {
+	
+	[textView setEditable:NO];
+	
+	NSRange range = [textView selectedRange];
+	
+	if (range.location == [[[textView textStorage] string] length]) {
+		range.location = 0;
+		[textView setSelectedRange:NSMakeRange(0,0)];
+		[textView scrollRangeToVisible:NSMakeRange(0,0)];
+	}
+	
+	NSString *wholeText = [[textView textStorage] string];
+	NSString *text = nil;
+	
+	if (range.length > 0) { // selection
+		text = [wholeText substringWithRange:range];
+	} else { // only pointer
+		text = [wholeText substringWithRange:NSMakeRange(range.location, [wholeText length] - range.location)];
+	}
+	
+	[synth startSpeakingString:text];
+	
+	oldRange = range;
+	
 }
 
 -(IBAction)seekForward:(id)sender {
 	// not working yet
-	/*
-	[self speakAction:self];
+	
+	[self stopSpeaking];
+	
 	NSRange selected = [textView selectedRange];
 	NSString *wholeText = [[textView textStorage] string];
 	NSRange position = [wholeText rangeOfString:@". " options:NSLiteralSearch range:NSMakeRange(selected.location + 1, [wholeText length] - selected.location - 1)];
 	[textView setSelectedRange:NSMakeRange(position.location + 2, 0)];
-	isNewLocation = YES;
-	NSLog(@"sp %i", [synth isSpeaking]);
-	[self speakAction:self];
-	 */
+
+	[self startSpeaking];
 }
 
 -(IBAction)seekBack:(id)sender {
@@ -103,6 +100,11 @@
 	[textView scrollRangeToVisible:range];
 	[textView setSelectedRange:NSMakeRange(range.location, 0)];
 	[textView showFindIndicatorForRange:range];
+	[textView display];
+}
+
+- (void)speechSynthesizer:(NSSpeechSynthesizer *)sender didFinishSpeaking:(BOOL)success {
+    [textView setEditable:YES];
 }
 
 - (void)dealloc {
