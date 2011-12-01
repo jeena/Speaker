@@ -8,7 +8,13 @@
 
 #import "SpeakerAppDelegate.h"
 
+@interface SpeakerAppDelegate (private)
+- (void)initLanugageMenu;
+@end
+
 @implementation SpeakerAppDelegate
+@synthesize languageMenu;
+@synthesize languageMenuPopupButton;
 
 @synthesize window, textView;
 
@@ -29,6 +35,49 @@
 		[textView setSelectedRange:aRange];
 		[textView scrollRangeToVisible:aRange];
 	}
+    
+    [self initLanugageMenu];
+}
+
+- (void)initLanugageMenu
+{
+    NSInteger start = [[NSUserDefaults standardUserDefaults] integerForKey:@"languageVoiceIndex"];
+    
+    NSLocale *currentLocale = [NSLocale currentLocale];
+    NSArray *voices = [NSSpeechSynthesizer availableVoices];
+    
+    [self.languageMenu removeAllItems];
+    for (NSInteger i = 0; i < [voices count]; i++)
+    {
+        NSDictionary *dict = [NSSpeechSynthesizer attributesForVoice:[voices objectAtIndex:i]];
+        if (i == 0) {
+            NSLog(@"%@", dict);
+        }
+        
+        NSString *country = [currentLocale displayNameForKey:NSLocaleIdentifier value:[dict objectForKey:@"VoiceLocaleIdentifier"]];
+        
+        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"%@ - %@", country, [dict objectForKey:@"VoiceName"]] action:@selector(changeLanguage:) keyEquivalent:@""];
+        item.tag = i;
+        [self.languageMenu addItem:item];
+        [item release];
+        
+        if (![[NSUserDefaults standardUserDefaults] objectForKey:@"languageVoiceIndex"] && [[dict objectForKey:@"VoiceName"] isEqualToString:@"Alex"])
+        {
+            start = i;
+        }
+    }
+    
+    [self.languageMenuPopupButton selectItemAtIndex:start];
+}
+
+- (void)changeLanguage:(id)sender
+{
+    NSInteger index = [(NSMenuItem *)sender tag];
+    NSString *voice = [[NSSpeechSynthesizer attributesForVoice:[[NSSpeechSynthesizer availableVoices] objectAtIndex:index]] objectForKey:@"VoiceIdentifier"];
+    [synth setVoice:voice];
+    [[NSUserDefaults standardUserDefaults] setInteger:index forKey:@"languageVoiceIndex"];
+    
+    [self.languageMenuPopupButton selectItemAtIndex:index];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -101,6 +150,11 @@
 	[textView setSelectedRange:NSMakeRange(range.location, 0)];
 	[textView showFindIndicatorForRange:range];
 	[textView display];
+}
+
+- (void)changeVoiceGender:(id)sender
+{
+    
 }
 
 - (void)speechSynthesizer:(NSSpeechSynthesizer *)sender didFinishSpeaking:(BOOL)success {
