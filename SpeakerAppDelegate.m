@@ -50,10 +50,6 @@
     for (NSInteger i = 0; i < [voices count]; i++)
     {
         NSDictionary *dict = [NSSpeechSynthesizer attributesForVoice:[voices objectAtIndex:i]];
-        if (i == 0) {
-            NSLog(@"%@", dict);
-        }
-        
         NSString *country = [currentLocale displayNameForKey:NSLocaleIdentifier value:[dict objectForKey:@"VoiceLocaleIdentifier"]];
         
         NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"%@ - %@", country, [dict objectForKey:@"VoiceName"]] action:@selector(changeLanguage:) keyEquivalent:@""];
@@ -67,7 +63,7 @@
         }
     }
     
-    [self.languageMenuPopupButton selectItemAtIndex:start];
+    [self changeLanguage:[self.languageMenu itemAtIndex:start]];
 }
 
 - (void)changeLanguage:(id)sender
@@ -75,8 +71,8 @@
     NSInteger index = [(NSMenuItem *)sender tag];
     NSString *voice = [[NSSpeechSynthesizer attributesForVoice:[[NSSpeechSynthesizer availableVoices] objectAtIndex:index]] objectForKey:@"VoiceIdentifier"];
     [synth setVoice:voice];
-    [[NSUserDefaults standardUserDefaults] setInteger:index forKey:@"languageVoiceIndex"];
     
+    [[NSUserDefaults standardUserDefaults] setInteger:index forKey:@"languageVoiceIndex"];
     [self.languageMenuPopupButton selectItemAtIndex:index];
 }
 
