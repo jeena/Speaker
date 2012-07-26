@@ -9,19 +9,19 @@
 #import <Cocoa/Cocoa.h>
 
 @interface SpeakerAppDelegate : NSObject <NSApplicationDelegate, NSSpeechSynthesizerDelegate> {
-    NSWindow *window;
+    NSWindow *__weak window;
 	NSTextView *textView;
-    NSMenu *languageMenu;
-    NSPopUpButton *languageMenuPopupButton;
+    NSMenu *__weak languageMenu;
+    NSPopUpButton *__weak languageMenuPopupButton;
 	NSSpeechSynthesizer *synth;
 	NSRange oldRange;
 	BOOL isNewLocation;
 }
 
-@property (assign) IBOutlet NSWindow *window;
-@property (retain, nonatomic) IBOutlet NSTextView *textView;
-@property (assign) IBOutlet NSMenu *languageMenu;
-@property (assign) IBOutlet NSPopUpButton *languageMenuPopupButton;
+@property (weak) IBOutlet NSWindow *window;
+@property (strong, nonatomic) IBOutlet NSTextView *textView;
+@property (weak) IBOutlet NSMenu *languageMenu;
+@property (weak) IBOutlet NSPopUpButton *languageMenuPopupButton;
 
 -(IBAction)speakAction:(id)sender;
 -(IBAction)seekForward:(id)sender;

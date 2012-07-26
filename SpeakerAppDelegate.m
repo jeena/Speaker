@@ -30,7 +30,6 @@
 	if (string) {
 		NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:string];
 		[[textView textStorage] setAttributedString:attributedString];
-		[attributedString release];
 		NSRange aRange = NSMakeRange([defaults integerForKey:@"startLocation"], 0);
 		[textView setSelectedRange:aRange];
 		[textView scrollRangeToVisible:aRange];
@@ -55,7 +54,6 @@
         NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"%@ - %@", country, [dict objectForKey:@"VoiceName"]] action:@selector(changeLanguage:) keyEquivalent:@""];
         item.tag = i;
         [self.languageMenu addItem:item];
-        [item release];
         
         if (![[NSUserDefaults standardUserDefaults] objectForKey:@"languageVoiceIndex"] && [[dict objectForKey:@"VoiceName"] isEqualToString:@"Alex"])
         {
@@ -117,7 +115,8 @@
 		text = [wholeText substringWithRange:NSMakeRange(range.location, [wholeText length] - range.location)];
 	}
 	
-	[synth startSpeakingString:text];
+	[synth stopSpeaking];
+    [synth startSpeakingString:text];
 	
 	oldRange = range;
 	
@@ -157,9 +156,5 @@
     [textView setEditable:YES];
 }
 
-- (void)dealloc {
-	[synth release];
-	[super dealloc];
-}
 
 @end
