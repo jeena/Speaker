@@ -40,38 +40,52 @@
 
 - (void)initLanugageMenu
 {
-    NSInteger start = [[NSUserDefaults standardUserDefaults] integerForKey:@"languageVoiceIndex"];
+    NSString *startName = [[NSUserDefaults standardUserDefaults] stringForKey:@"languageVoiceName"];
+    NSMenuItem *startItem = nil;
     
     NSLocale *currentLocale = [NSLocale currentLocale];
     NSArray *voices = [NSSpeechSynthesizer availableVoices];
     
     [self.languageMenu removeAllItems];
+    
     for (NSInteger i = 0; i < [voices count]; i++)
     {
         NSDictionary *dict = [NSSpeechSynthesizer attributesForVoice:[voices objectAtIndex:i]];
-        NSString *country = [currentLocale displayNameForKey:NSLocaleIdentifier value:[dict objectForKey:@"VoiceLocaleIdentifier"]];
+        NSString *countryString = [currentLocale displayNameForKey:NSLocaleIdentifier value:[dict objectForKey:@"VoiceLocaleIdentifier"]];
         
-        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"%@ - %@", country, [dict objectForKey:@"VoiceName"]] action:@selector(changeLanguage:) keyEquivalent:@""];
+        NSMenuItem *country = [self.languageMenu itemWithTitle:countryString];
+        if (!country) {
+            country = [[NSMenuItem alloc] initWithTitle:countryString action:nil keyEquivalent:@""];
+            NSMenu *submenu = [[NSMenu alloc] init];
+            [country setSubmenu:submenu];
+            [self.languageMenu addItem:country];
+        }
+        
+        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:[dict objectForKey:@"VoiceName"] action:@selector(changeLanguage:) keyEquivalent:@""];
         item.tag = i;
-        [self.languageMenu addItem:item];
+        [[country submenu] addItem:item];
         
-        if (![[NSUserDefaults standardUserDefaults] objectForKey:@"languageVoiceIndex"] && [[dict objectForKey:@"VoiceName"] isEqualToString:@"Alex"])
+        if ((![[NSUserDefaults standardUserDefaults] objectForKey:@"languageVoiceIndex"] && [[dict objectForKey:@"VoiceName"] isEqualToString:@"Alex"]) || [item.title isEqualToString:startName])
         {
-            start = i;
+            startItem = item;
         }
     }
     
-    [self changeLanguage:[self.languageMenu itemAtIndex:start]];
+    [self changeLanguage:startItem];
 }
 
 - (void)changeLanguage:(id)sender
 {
-    NSInteger index = [(NSMenuItem *)sender tag];
-    NSString *voice = [[NSSpeechSynthesizer attributesForVoice:[[NSSpeechSynthesizer availableVoices] objectAtIndex:index]] objectForKey:@"VoiceIdentifier"];
-    [synth setVoice:voice];
+    NSMenuItem *item = (NSMenuItem *)sender;
     
-    [[NSUserDefaults standardUserDefaults] setInteger:index forKey:@"languageVoiceIndex"];
-    [self.languageMenuPopupButton selectItemAtIndex:index];
+    // Only if the user doesn't chose the same as it already was.
+    if (item.menu != self.languageMenu) {
+        NSString *voice = [[NSSpeechSynthesizer attributesForVoice:[[NSSpeechSynthesizer availableVoices] objectAtIndex:item.tag]] objectForKey:@"VoiceIdentifier"];
+        [synth setVoice:voice];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:item.title forKey:@"languageVoiceName"];
+        [self.languageMenuPopupButton setTitle:item.title];
+    }
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
