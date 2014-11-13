@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
+		1F6C8C521A06A13D004D992E /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F6C8C501A06A13D004D992E /* pause.png */; };
+		1F6C8C531A06A13D004D992E /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F6C8C511A06A13D004D992E /* play.png */; };
 		1FA38C49124D27C8004B8852 /* play-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FA38C48124D27C8004B8852 /* play-icon.png */; };
 		1FA38CD3124D4349004B8852 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1FA38CD2124D4349004B8852 /* Icon.icns */; };
 		1FF67B3E12948FDE00CA07A3 /* SpeakerApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF67B3D12948FDE00CA07A3 /* SpeakerApplication.m */; };
@@ -22,6 +24,8 @@
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		1DDD58150DA1D0A300B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		1F6C8C501A06A13D004D992E /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
+		1F6C8C511A06A13D004D992E /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		1FA38C48124D27C8004B8852 /* play-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-icon.png"; sourceTree = "<group>"; };
 		1FA38CD2124D4349004B8852 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		1FF67B3C12948FDE00CA07A3 /* SpeakerApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeakerApplication.h; sourceTree = "<group>"; };
@@ -109,6 +113,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1F6C8C501A06A13D004D992E /* pause.png */,
+				1F6C8C511A06A13D004D992E /* play.png */,
 				1FA38CD2124D4349004B8852 /* Icon.icns */,
 				1FA38C48124D27C8004B8852 /* play-icon.png */,
 				8D1107310486CEB800E47090 /* Speaker-Info.plist */,
@@ -153,6 +159,8 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Speaker" */;
 			compatibilityVersion = "Xcode 3.1";
 			developmentRegion = English;
@@ -179,8 +187,10 @@
 			files = (
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
+				1F6C8C521A06A13D004D992E /* pause.png in Resources */,
 				1FA38C49124D27C8004B8852 /* play-icon.png in Resources */,
 				1FA38CD3124D4349004B8852 /* Icon.icns in Resources */,
+				1F6C8C531A06A13D004D992E /* play.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,29 +10,29 @@
 	<string>Speaker</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>B3FBBA97-D123-44B8-9654-E8F7B4DE23C0</key>
+		<key>84929CFFB1C126DC09C07F4A0C98501C72BCAF7B</key>
 		<string>ssh://github.com/jeena/Speaker.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Speaker.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>B3FBBA97-D123-44B8-9654-E8F7B4DE23C0</key>
+		<key>84929CFFB1C126DC09C07F4A0C98501C72BCAF7B</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>ssh://github.com/jeena/Speaker.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>B3FBBA97-D123-44B8-9654-E8F7B4DE23C0</string>
+	<string>84929CFFB1C126DC09C07F4A0C98501C72BCAF7B</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>B3FBBA97-D123-44B8-9654-E8F7B4DE23C0</string>
+			<string>84929CFFB1C126DC09C07F4A0C98501C72BCAF7B</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Speaker</string>
 		</dict>
