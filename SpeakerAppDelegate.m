@@ -16,12 +16,11 @@
 @synthesize languageMenu;
 @synthesize languageMenuPopupButton;
 @synthesize speakButton;
+@synthesize synth;
 
 @synthesize window, textView;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-	// Insert code here to initialize your application 
-	synth = [[NSSpeechSynthesizer alloc] init];
 	synth.delegate = self;
 	oldRange = NSMakeRange(-1, -1);
 	isNewLocation = YES;
@@ -36,6 +35,13 @@
 		[textView setSelectedRange:aRange];
 		[textView scrollRangeToVisible:aRange];
 	}
+    
+    float volume = [defaults floatForKey:@"volume"];
+    if (volume == 0.0) {
+        synth.volume = 1.0;
+    } else {
+        synth.volume = volume / 100;
+    }
     
     [self initLanugageMenu];
 }
@@ -126,6 +132,8 @@
 }
 
 -(void)startSpeaking {
+    
+    [synth stopSpeaking];
 	
 	[textView setEditable:NO];
 	
@@ -145,13 +153,9 @@
 	} else { // only pointer
 		text = [wholeText substringWithRange:NSMakeRange(range.location, [wholeText length] - range.location)];
 	}
-	
-	[synth stopSpeaking];
     
     [self setVoiceForLanguage:[self findLanguageFromString:text]];
-    
     [synth startSpeakingString:text];
-	
 	oldRange = range;
 	
 }
@@ -171,6 +175,19 @@
 
 -(IBAction)seekBack:(id)sender {
 
+}
+
+- (IBAction)setVolume:(NSSlider *)sender {
+    BOOL restart = NO;
+    if ([synth isSpeaking]) {
+        restart = YES;
+        [self stopSpeaking];
+    }
+    synth.volume = sender.floatValue / 100;
+    
+    if (restart) {
+        [self startSpeaking];
+    }
 }
 
 - (void)speechSynthesizer:(NSSpeechSynthesizer *)sender willSpeakWord:(NSRange)wordToSpeak ofString:(NSString *)text {
@@ -194,7 +211,7 @@
 {
     NSArray *tagschemes = [NSArray arrayWithObjects:NSLinguisticTagSchemeLanguage, nil];
     NSLinguisticTagger *tagger = [[NSLinguisticTagger alloc] initWithTagSchemes:tagschemes options:0];
-    [tagger setString:text];
+    [tagger setString:[[[text componentsSeparatedByCharactersInSet:[[NSCharacterSet letterCharacterSet] invertedSet]] componentsJoinedByString:@" "] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
     NSString *language = [tagger tagAtIndex:0 scheme:NSLinguisticTagSchemeLanguage tokenRange:NULL sentenceRange:NULL];
     
     return language;

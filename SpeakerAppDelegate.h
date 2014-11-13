@@ -13,7 +13,6 @@
 	NSTextView *textView;
     NSMenu *__weak languageMenu;
     NSPopUpButton *__weak languageMenuPopupButton;
-	NSSpeechSynthesizer *synth;
 	NSRange oldRange;
 	BOOL isNewLocation;
     NSArray *languages;
@@ -24,10 +23,12 @@
 @property (weak) IBOutlet NSMenu *languageMenu;
 @property (weak) IBOutlet NSPopUpButton *languageMenuPopupButton;
 @property (weak) IBOutlet NSToolbarItem *speakButton;
+@property (weak) IBOutlet NSSpeechSynthesizer *synth;
 
 -(IBAction)speakAction:(id)sender;
 -(IBAction)seekForward:(id)sender;
 -(IBAction)seekBack:(id)sender;
+-(IBAction)setVolume:(NSSlider *)sender;
 
 -(void)stopSpeaking;
 -(void)startSpeaking;
