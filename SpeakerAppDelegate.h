@@ -28,7 +28,6 @@
 -(IBAction)speakAction:(id)sender;
 -(IBAction)seekForward:(id)sender;
 -(IBAction)seekBack:(id)sender;
--(IBAction)setVolume:(NSSlider *)sender;
 
 -(void)stopSpeaking;
 -(void)startSpeaking;

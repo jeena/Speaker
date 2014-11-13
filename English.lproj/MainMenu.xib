@@ -18,8 +18,6 @@
 			<string>NSPopUpButtonCell</string>
 			<string>NSScrollView</string>
 			<string>NSScroller</string>
-			<string>NSSlider</string>
-			<string>NSSliderCell</string>
 			<string>NSTextView</string>
 			<string>NSToolbar</string>
 			<string>NSToolbarFlexibleSpaceItem</string>
@@ -1323,48 +1321,6 @@
 					<int key="NSToolbarDisplayMode">1</int>
 					<int key="NSToolbarSizeMode">1</int>
 					<dictionary class="NSMutableDictionary" key="NSToolbarIBIdentifiedItems">
-						<object class="NSToolbarItem" key="6B9D411D-B22D-42EF-A3C2-F6BC2192030C" id="760683990">
-							<string key="NSToolbarItemIdentifier">6B9D411D-B22D-42EF-A3C2-F6BC2192030C</string>
-							<string key="NSToolbarItemLabel">Volume</string>
-							<string key="NSToolbarItemPaletteLabel">Volume</string>
-							<nil key="NSToolbarItemToolTip"/>
-							<object class="NSSlider" key="NSToolbarItemView" id="1056307265">
-								<reference key="NSNextResponder"/>
-								<int key="NSvFlags">268</int>
-								<string key="NSFrame">{{0, 14}, {96, 26}}</string>
-								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
-								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<bool key="NSEnabled">YES</bool>
-								<object class="NSSliderCell" key="NSCell" id="279183685">
-									<int key="NSCellFlags">-2080374784</int>
-									<int key="NSCellFlags2">0</int>
-									<string key="NSContents"/>
-									<string key="NSCellIdentifier">_NS:9</string>
-									<reference key="NSControlView" ref="1056307265"/>
-									<double key="NSMaxValue">100</double>
-									<double key="NSMinValue">0.0</double>
-									<double key="NSValue">50</double>
-									<double key="NSAltIncValue">0.0</double>
-									<int key="NSNumberOfTickMarks">6</int>
-									<int key="NSTickMarkPosition">1</int>
-									<bool key="NSAllowsTickMarkValuesOnly">NO</bool>
-									<bool key="NSVertical">NO</bool>
-								</object>
-								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-							</object>
-							<nil key="NSToolbarItemImage"/>
-							<nil key="NSToolbarItemTarget"/>
-							<nil key="NSToolbarItemAction"/>
-							<string key="NSToolbarItemMinSize">{96, 21}</string>
-							<string key="NSToolbarItemMaxSize">{96, 26}</string>
-							<bool key="NSToolbarItemEnabled">YES</bool>
-							<bool key="NSToolbarItemAutovalidates">YES</bool>
-							<int key="NSToolbarItemTag">0</int>
-							<bool key="NSToolbarIsUserRemovable">YES</bool>
-							<int key="NSToolbarItemVisibilityPriority">0</int>
-						</object>
 						<object class="NSToolbarItem" key="BB31836C-C94C-4C54-B51B-8C9C9A2D1280" id="319967180">
 							<object class="NSMutableString" key="NSToolbarItemIdentifier">
 								<characters key="NS.bytes">BB31836C-C94C-4C54-B51B-8C9C9A2D1280</characters>
@@ -1378,7 +1334,6 @@
 								<string key="NSFrame">{{0, 14}, {264, 25}}</string>
 								<reference key="NSSuperview"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:868</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSPopUpButtonCell" key="NSCell" id="890650070">
@@ -1631,12 +1586,10 @@
 						<reference ref="911163514"/>
 						<reference ref="405021031"/>
 						<reference ref="319967180"/>
-						<reference ref="760683990"/>
 					</array>
-					<array key="NSToolbarIBDefaultItems">
+					<array class="NSMutableArray" key="NSToolbarIBDefaultItems">
 						<reference ref="405021031"/>
 						<reference ref="188610191"/>
-						<reference ref="760683990"/>
 						<reference ref="448369132"/>
 						<reference ref="188610191"/>
 						<reference ref="319967180"/>
@@ -1850,7 +1803,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 			<object class="NSUserDefaultsController" id="789215370">
 				<bool key="NSSharedInstance">YES</bool>
 			</object>
-			<object class="NSCustomObject" id="568888154">
+			<object class="NSCustomObject" id="930775232">
 				<string key="NSClassName">NSSpeechSynthesizer</string>
 			</object>
 		</array>
@@ -2572,33 +2525,9 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">synth</string>
 						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="568888154"/>
+						<reference key="destination" ref="930775232"/>
 					</object>
 					<int key="connectionID">621</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">setVolume:</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="1056307265"/>
-					</object>
-					<int key="connectionID">636</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: values.volume</string>
-						<reference key="source" ref="1056307265"/>
-						<reference key="destination" ref="789215370"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="1056307265"/>
-							<reference key="NSDestination" ref="789215370"/>
-							<string key="NSLabel">value: values.volume</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">values.volume</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">639</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3598,7 +3527,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<reference ref="911163514"/>
 							<reference ref="405021031"/>
 							<reference ref="319967180"/>
-							<reference ref="760683990"/>
 						</array>
 						<reference key="parent" ref="972006081"/>
 					</object>
@@ -3722,29 +3650,8 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">598</int>
-						<reference key="object" ref="760683990"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="1056307265"/>
-						</array>
-						<reference key="parent" ref="1046718163"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">596</int>
-						<reference key="object" ref="1056307265"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="279183685"/>
-						</array>
-						<reference key="parent" ref="760683990"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">597</int>
-						<reference key="object" ref="279183685"/>
-						<reference key="parent" ref="1056307265"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">620</int>
-						<reference key="object" ref="568888154"/>
+						<reference key="object" ref="930775232"/>
 						<reference key="parent" ref="0"/>
 					</object>
 				</array>
@@ -3913,9 +3820,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 				<string key="57.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="58.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="580.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="596.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="597.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="598.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="620.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="72.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3950,7 +3854,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="seekBack:">id</string>
 						<string key="seekForward:">id</string>
-						<string key="setVolume:">NSSlider</string>
 						<string key="speakAction:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -3961,10 +3864,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<object class="IBActionInfo" key="seekForward:" id="429231919">
 							<string key="name">seekForward:</string>
 							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="setVolume:" id="259827734">
-							<string key="name">setVolume:</string>
-							<string key="candidateClassName">NSSlider</string>
 						</object>
 						<object class="IBActionInfo" key="speakAction:" id="451012767">
 							<string key="name">speakAction:</string>
@@ -4015,7 +3914,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="seekBack:">id</string>
 						<string key="seekForward:">id</string>
-						<string key="setVolume:">NSSlider</string>
 						<string key="speakAction:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -4026,10 +3924,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<object class="IBActionInfo" key="seekForward:">
 							<string key="name">seekForward:</string>
 							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="setVolume:">
-							<string key="name">setVolume:</string>
-							<string key="candidateClassName">NSSlider</string>
 						</object>
 						<object class="IBActionInfo" key="speakAction:">
 							<string key="name">speakAction:</string>
@@ -4047,13 +3941,11 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="seekBack:">id</string>
 						<string key="seekForward:">id</string>
-						<string key="setVolume:">NSSlider</string>
 						<string key="speakAction:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<reference key="seekBack:" ref="812720436"/>
 						<reference key="seekForward:" ref="429231919"/>
-						<reference key="setVolume:" ref="259827734"/>
 						<reference key="speakAction:" ref="451012767"/>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">

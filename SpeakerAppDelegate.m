@@ -62,6 +62,10 @@
     {
         NSDictionary *dict = [NSSpeechSynthesizer attributesForVoice:[voices objectAtIndex:i]];
         NSString *countryString = [currentLocale displayNameForKey:NSLocaleIdentifier value:[dict objectForKey:@"VoiceLocaleIdentifier"]];
+
+        if ([countryString hasPrefix:@"English"] && ![countryString isEqualToString:@"English (United States)"]) {
+            continue;
+        }
         
         NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:[dict objectForKey:@"VoiceName"] action:@selector(changeLanguage:) keyEquivalent:@""];
         NSMenuItem *country = [self.languageMenu itemWithTitle:countryString];
@@ -177,19 +181,6 @@
 
 }
 
-- (IBAction)setVolume:(NSSlider *)sender {
-    BOOL restart = NO;
-    if ([synth isSpeaking]) {
-        restart = YES;
-        [self stopSpeaking];
-    }
-    synth.volume = sender.floatValue / 100;
-    
-    if (restart) {
-        [self startSpeaking];
-    }
-}
-
 - (void)speechSynthesizer:(NSSpeechSynthesizer *)sender willSpeakWord:(NSRange)wordToSpeak ofString:(NSString *)text {
 	NSRange range = NSMakeRange(oldRange.location + wordToSpeak.location, wordToSpeak.length);
 	[textView scrollRangeToVisible:range];
@@ -230,7 +221,9 @@
                     break;
                 }
             }
-            item = [[languageItem.submenu itemArray] objectAtIndex:0];
+            if (!item) {
+                item = [[languageItem.submenu itemArray] objectAtIndex:0];
+            }
         }
     }
     
