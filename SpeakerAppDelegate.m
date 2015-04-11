@@ -46,6 +46,28 @@
     [self initLanugageMenu];
 }
 
+- (void)applicationWillFinishLaunching:(NSNotification *)aNotification
+{
+    [[NSAppleEventManager sharedAppleEventManager]
+     setEventHandler:self
+     andSelector:@selector(handleURLEvent:withReplyEvent:)
+     forEventClass:kInternetEventClass
+     andEventID:kAEGetURL];
+}
+
+- (void)handleURLEvent:(NSAppleEventDescriptor*)event
+        withReplyEvent:(NSAppleEventDescriptor*)replyEvent
+{
+    NSString* text = [[[[event paramDescriptorForKeyword:keyDirectObject]
+                     stringValue] substringFromIndex:8] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+    if ([synth isSpeaking]) {
+        [self speakAction:self];
+    }
+    [textView setString:text];
+    [self speakAction:self];
+}
+
 - (void)initLanugageMenu
 {
     NSString *startName = [[NSUserDefaults standardUserDefaults] stringForKey:@"languageVoiceName"];
@@ -57,6 +79,7 @@
     
     NSMutableArray *langs = [NSMutableArray arrayWithCapacity:[voices count]];
     NSMutableArray *defaultVoices = [[NSUserDefaults standardUserDefaults] mutableArrayValueForKey:@"defaultVoices"];
+    NSLog(@"%@", defaultVoices);
     
     for (NSInteger i = 0; i < [voices count]; i++)
     {
@@ -81,7 +104,7 @@
         item.tag = i;
         [[country submenu] addItem:item];
         
-        if ([defaultVoices indexOfObjectIdenticalTo:item.title] != NSNotFound) {
+        if ([defaultVoices indexOfObject:item.title] != NSNotFound) {
             item.state = NSOnState;
         }
         
@@ -103,7 +126,11 @@
 
     for (NSMenuItem *child in parent.submenu.itemArray) {
         if (child.state == NSOnState) {
-            [defaultVoices removeObjectIdenticalTo:child.title];
+            for (NSString *voice in defaultVoices) {
+                if ([child.title isEqualToString:voice]) {
+                    [defaultVoices removeObject:voice];
+                }
+            }
             child.state = NSOffState;
         }
     }

@@ -28,5 +28,14 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>SpeakerApplication</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>speaker</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>
