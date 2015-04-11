@@ -79,7 +79,6 @@
     
     NSMutableArray *langs = [NSMutableArray arrayWithCapacity:[voices count]];
     NSMutableArray *defaultVoices = [[NSUserDefaults standardUserDefaults] mutableArrayValueForKey:@"defaultVoices"];
-    NSLog(@"%@", defaultVoices);
     
     for (NSInteger i = 0; i < [voices count]; i++)
     {
